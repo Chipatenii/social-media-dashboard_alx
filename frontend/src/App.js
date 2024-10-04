@@ -1,19 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Signup from './components/Signup';
-import Login from './components/Login';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/profile/:id" element={<Profile />} />
-      </Routes>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Feed} />
+        <Route path="/profile/:userId" component={Profile} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+      </Switch>
     </Router>
   );
 }

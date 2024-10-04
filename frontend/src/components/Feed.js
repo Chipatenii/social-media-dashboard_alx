@@ -1,10 +1,28 @@
-import React from 'react';
-function Feed() {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Post from './Post';
+
+const Feed = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/posts')
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the posts!', error);
+      });
+  }, []);
+
   return (
-    <div>
-      <h1>Your Feed</h1>
-      {/* Logic for displaying posts will go here */}
+    <div className="feed">
+      <h2>Feed</h2>
+      {posts.map(post => (
+        <Post key={post._id} post={post} />
+      ))}
     </div>
   );
-}
+};
+
 export default Feed;
