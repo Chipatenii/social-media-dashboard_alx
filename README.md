@@ -35,7 +35,8 @@ This is a social media dashboard where users can post updates, follow others, an
 - **POST /api/auth/signup** - Register a new user
 - **POST /api/auth/login** - Login a user
 
-social-media-dashboard/
+
+social-media-dashboard_alx/
 │
 ├── backend/
 │   ├── controllers/
