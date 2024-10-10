@@ -1,9 +1,11 @@
 # Social Media Dashboard
 
 ## Overview
+
 This is a social media dashboard where users can post updates, follow others, and view a feed. Users can like, comment, and create profiles.
 
 ## Features
+
 - User authentication (signup/login)
 - Post creation and deletion
 - Follow other users
@@ -12,6 +14,7 @@ This is a social media dashboard where users can post updates, follow others, an
 - Edit profiles
 
 ## Tech Stack
+
 - **Frontend**: React.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
@@ -19,12 +22,14 @@ This is a social media dashboard where users can post updates, follow others, an
 ## Installation
 
 ### Backend
+
 1. Navigate to the `backend/` folder.
 2. Install dependencies: `npm install`
 3. Create a `.env` file with the following variables:
 4. Run the backend: `npm run dev`
 
 ### Frontend
+
 1. Navigate to the `frontend/` folder.
 2. Install dependencies: `npm install`
 3. Run the frontend: `npm start`
@@ -32,10 +37,13 @@ This is a social media dashboard where users can post updates, follow others, an
 ## API Endpoints
 
 ### Auth
+
 - **POST /api/auth/signup** - Register a new user
 - **POST /api/auth/login** - Login a user
 
+## Project Architecture
 
+```
 social-media-dashboard_alx/
 │
 ├── backend/
@@ -74,3 +82,13 @@ social-media-dashboard_alx/
 ├── .gitignore
 ├── README.md
 └── package.json
+```
+
+## Usage Guidelines
+
+1. Register a new user or login with existing credentials.
+2. Create, edit, or delete posts.
+3. Follow other users to see their updates in your feed.
+4. Like and comment on posts.
+5. Edit your profile information.
+
