@@ -18,7 +18,7 @@ exports.createPost = async (req, res) => {
 // Delete Post
 exports.deletePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.postId); // Use postId instead of id
+        const post = await Post.findById(req.params.postId); 
         if (!post) return res.status(404).json({ message: 'Post not found' });
 
         if (post.user.toString() !== req.user.id) {
