@@ -2,27 +2,42 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-exports.signup = async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const user = new User({ name, email, password: bcrypt.hashSync(password, 10) });
-    await user.save();
-    res.status(201).json({ msg: 'User created' });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+// User Registration
+exports.register = async (req, res) => {
+    const { username, email, password } = req.body;
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) return res.status(400).json({ message: 'User already exists' });
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+        const newUser = new User({ username, email, password: hashedPassword });
+        await newUser.save();
+
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(201).json({ user: newUser, token });
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' });
+    }
 };
 
+// User Login
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user || !bcrypt.compareSync(password, user.password)) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) return res.status(400).json({ message: 'Invalid credentials' });
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ user, token });
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' });
     }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+};
+
+// Logout
+exports.logout = (req, res) => {
+    res.status(200).json({ message: 'Logged out successfully' });
 };
