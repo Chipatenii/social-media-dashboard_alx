@@ -1,39 +1,48 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import authService from '../services/authService';
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogin = async (e) => {
+  const { email, password } = formData;
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/login', { email, password });
-      history.push('/');
-    } catch (error) {
-      console.error('There was an error logging in!', error);
+      await authService.login(email, password);
+      history.push('/feed');
+    } catch (err) {
+      console.error(err.response.data.message);
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={onChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={onChange}
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+    </div>
   );
 };
 

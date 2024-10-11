@@ -1,38 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Post from './Post';
+import React, { useState, useEffect } from 'react';
+import userService from '../services/userService';
 
 const Profile = ({ match }) => {
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const userId = match.params.userId;
-    axios.get(`/api/users/${userId}`)
-      .then(response => {
-        setUser(response.data);
-        return axios.get(`/api/users/${userId}/posts`);
-      })
-      .then(response => {
-        setPosts(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the profile!', error);
-      });
-  }, [match.params.userId]);
+    const fetchUser = async () => {
+      try {
+        const res = await userService.getUser(match.params.id);
+        setUser(res.data.user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUser();
+  }, [match.params.id]);
+
+  if (!user) return <div>Loading...</div>;
 
   return (
-    <div className="profile">
-      {user && (
-        <div>
-          <h2>{user.name}</h2>
-          <p>{user.bio}</p>
-        </div>
-      )}
-      <h3>Posts</h3>
-      {posts.map(post => (
-        <Post key={post._id} post={post} />
-      ))}
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.bio}</p>
+      {/* Display user posts */}
     </div>
   );
 };

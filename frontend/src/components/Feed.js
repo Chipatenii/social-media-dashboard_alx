@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import postService from '../services/postService';
 import Post from './Post';
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/posts')
-      .then(response => {
-        setPosts(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the posts!', error);
-      });
+    const fetchPosts = async () => {
+      try {
+        const res = await postService.getFeed();
+        setPosts(res.data.posts);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   return (
-    <div className="feed">
-      <h2>Feed</h2>
+    <div>
+      <h1>Your Feed</h1>
       {posts.map(post => (
         <Post key={post._id} post={post} />
       ))}
