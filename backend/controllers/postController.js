@@ -18,7 +18,7 @@ exports.createPost = async (req, res) => {
 // Delete Post
 exports.deletePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.postId); // Use postId instead of id
         if (!post) return res.status(404).json({ message: 'Post not found' });
 
         if (post.user.toString() !== req.user.id) {
@@ -31,6 +31,7 @@ exports.deletePost = async (req, res) => {
         res.status(500).json({ message: 'Failed to delete post' });
     }
 };
+
 
 // View Posts (for feed)
 exports.getFeed = async (req, res) => {
