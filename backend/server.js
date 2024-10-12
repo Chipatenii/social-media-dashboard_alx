@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
-const { errorHandler } = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler'); // Correct import
 
 // Load environment variables from .env file
 dotenv.config();
