@@ -32,7 +32,6 @@ exports.deletePost = async (req, res) => {
     }
 };
 
-
 // View Posts (for feed)
 exports.getFeed = async (req, res) => {
     try {
@@ -40,5 +39,45 @@ exports.getFeed = async (req, res) => {
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ message: 'Failed to fetch posts' });
+    }
+};
+
+// Like a Post
+exports.likePost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.postId);
+        if (!post) return res.status(404).json({ message: 'Post not found' });
+
+        // Check if the user has already liked the post
+        if (post.likes.includes(req.user.id)) {
+            return res.status(400).json({ message: 'Post already liked' });
+        }
+
+        post.likes.push(req.user.id);
+        await post.save();
+        res.status(200).json({ message: 'Post liked' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to like post' });
+    }
+};
+
+// Add a Comment
+exports.addComment = async (req, res) => {
+    const { text } = req.body;
+    try {
+        const post = await Post.findById(req.params.postId);
+        if (!post) return res.status(404).json({ message: 'Post not found' });
+
+        const comment = {
+            user: req.user.id,
+            text,
+            date: new Date(),
+        };
+
+        post.comments.push(comment);
+        await post.save();
+        res.status(200).json({ message: 'Comment added' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to add comment' });
     }
 };
