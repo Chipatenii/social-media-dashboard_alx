@@ -45,43 +45,57 @@ This is a social media dashboard where users can post updates, follow others, an
 
 ```
 social-media-dashboard_alx/
-│
 ├── backend/
+│   ├── config/
+│   │   └── config.js
 │   ├── controllers/
 │   │   ├── authController.js
-│   │   ├── postController.js
-│   │   └── userController.js
+│   │   └── postController.js
+│   ├── middleware/
+│   │   └── authMiddleware.js
 │   ├── models/
-│   │   ├── Post.js
 │   │   ├── User.js
+│   │   └── Post.js
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── postRoutes.js
 │   │   └── userRoutes.js
-│   ├── config/
-│   │   └── db.js
-│   ├── middleware/
-│   │   ├── authMiddleware.js
-│   ├── app.js
-│   └── server.js
-│
+│   ├── server.js
+│   └── package.json
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Feed.js
-│   │   │   ├── Post.js
-│   │   │   ├── Profile.js
-│   │   │   ├── Signup.js
-│   │   │   ├── Login.js
-│   │   └── services/
-│   │   └── App.js
 │   ├── public/
 │   │   └── index.html
-│   └── package.json
-│
-├── .gitignore
-├── README.md
-└── package.json
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.js
+│   │   │   ├── Post.js
+│   │   │   └── Comment.js
+│   │   ├── context/
+│   │   │   └── AuthContext.js
+│   │   ├── layouts/
+│   │   │   └── MainLayout.js
+│   │   ├── pages/
+│   │   │   ├── HomePage.js
+│   │   │   ├── LoginPage.js
+│   │   │   ├── RegisterPage.js
+│   │   │   ├── ProfilePage.js
+│   │   │   └── NotFoundPage.js
+│   │   ├── services/
+│   │   │   ├── authService.js
+│   │   │   ├── postService.js
+│   │   │   └── userService.js
+│   │   ├── styles/
+│   │   │   ├── Navbar.css
+│   │   │   ├── Auth.css
+│   │   │   ├── MainLayout.css
+│   │   │   ├── HomePage.css
+│   │   │   └── ProfilePage.css
+│   │   ├── App.js
+│   │   ├── config.js
+│   │   ├── index.js
+│   │   └── package.json
+└── README.md
+
 ```
 
 ## Usage Guidelines
