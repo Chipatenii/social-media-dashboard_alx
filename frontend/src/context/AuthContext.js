@@ -12,14 +12,12 @@ export const AuthProvider = ({ children }) => {
     // Simulate user authentication status check (e.g., fetching user info from an API)
     useEffect(() => {
         const fetchUser = async () => {
-            // This could be replaced with a real authentication check (e.g., fetching from backend)
             const loggedInUser = JSON.parse(localStorage.getItem('user'));
             if (loggedInUser) {
                 setUser(loggedInUser);
             }
             setLoading(false);
         };
-        
         fetchUser();
     }, []);
 
@@ -36,11 +34,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, login, logout, setUser }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
 // Export the AuthContext for use in other components
-export default AuthContext;
+export { AuthContext };
