@@ -1,19 +1,21 @@
+// HomePage.js
 import React from 'react';
-import Feed from '../components/Feed';
-import Sidebar from '../layouts/Sidebar';
-import Header from '../layouts/Header';
-import Footer from '../layouts/Footer';
+import '../styles/index.css';
 
 const HomePage = () => {
   return (
-    <>
-      <Header />
-      <div className="main-content">
-        <Sidebar />
-        <Feed />
+    <div>
+      <div className="post">
+        <div className="post-header">
+          <h3>User Name</h3>
+          <span>Just now</span>
+        </div>
+        <p>This is a post content example. Users can share updates here.</p>
+        <button className="button">Like</button>
+        <button className="button">Comment</button>
+        <button className="button">Share</button>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

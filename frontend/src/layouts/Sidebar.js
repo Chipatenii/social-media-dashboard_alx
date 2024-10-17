@@ -1,15 +1,18 @@
+// Sidebar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/Sidebar.css';
+import '../styles/index.css';
 
 const Sidebar = () => {
   return (
-    <aside className="sidebar">
+    <div className="sidebar">
+      <h2>Shortcuts</h2>
       <ul>
-        <li><Link to="/">Feed</Link></li>
-        <li><Link to="/profile">My Profile</Link></li>
+        <li>Profile</li>
+        <li>Friends</li>
+        <li>Groups</li>
+        <li>Events</li>
       </ul>
-    </aside>
+    </div>
   );
 };
 

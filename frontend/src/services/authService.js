@@ -1,40 +1,24 @@
+// authService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/auth/';
+const API_URL = 'http://localhost:3001/api/auth'; // Update based on your backend setup
 
-// Register user
-const register = async (name, email, password) => {
-  const res = await axios.post(API_URL + 'register', { name, email, password });
-  return res.data;
-};
-
-// Login user
 const login = async (email, password) => {
-  const res = await axios.post(API_URL + 'login', { email, password });
-  
-  if (res.data.token) {
-    localStorage.setItem('user', JSON.stringify(res.data));
-  }
-
-  return res.data;
+    try {
+        const response = await axios.post(`${API_URL}/login`, { email, password });
+        return response.data;
+    } catch (error) {
+        throw new Error('Login failed. Please check your credentials.');
+    }
 };
 
-// Logout user
-const logout = () => {
-  localStorage.removeItem('user');
+const register = async (userData) => {
+    try {
+        const response = await axios.post(`${API_URL}/register`, userData);
+        return response.data;
+    } catch (error) {
+        throw new Error('Registration failed.');
+    }
 };
 
-// Check if user is authenticated
-const isAuthenticated = () => {
-  const user = localStorage.getItem('user');
-  return user ? true : false;
-};
-
-const authService = {
-  register,
-  login,
-  logout,
-  isAuthenticated,
-};
-
-export default authService;
+export default { login, register };

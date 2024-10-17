@@ -1,0 +1,99 @@
+/* index.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Light background for better contrast */
+}
+
+.auth-container {
+    background-color: #fff;
+    width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-container h2 {
+    color: #ff6700; /* Use orange color */
+    margin-bottom: 20px;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container input {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.auth-container button {
+    background-color: #001f3f; /* Navy color */
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-container button:hover {
+    background-color: #00173b; /* Slightly darker navy */
+}
+
+.navbar {
+    background-color: #ff6700; /* Orange background */
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.sidebar {
+    background-color: #001f3f; /* Navy background */
+    color: #fff;
+    width: 250px;
+    position: fixed;
+    top: 60px; /* Adjust for navbar height */
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.content {
+    margin-left: 270px; /* Adjust for sidebar width */
+    padding: 80px 20px 20px; /* Adjust for navbar height */
+}
+
+.post {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
