@@ -1,47 +1,27 @@
-// LoginPage.js
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import authService from '../services/authService';
-import { AuthContext } from '../context/AuthContext';
-import '../styles/index.css';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const { setUser } = useContext(AuthContext);
-    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
         try {
-            const userData = await authService.login(email, password);
-            setUser(userData);
-            navigate('/');
+            await authService.login({ email, password });
+            // Redirect to home
         } catch (error) {
-            setError('Login failed. Please check your email and password.');
+            console.error('Login failed', error);
         }
     };
 
     return (
         <div className="auth-container">
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+            <form onSubmit={handleSubmit}>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 <button type="submit">Login</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
         </div>
     );

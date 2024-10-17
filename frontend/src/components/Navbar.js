@@ -1,20 +1,16 @@
-// Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/index.css';
+import './styles/Navbar.css';
 
-const Navbar = () => {
-  return (
-    <div className="navbar">
-      <h1>Social Media Dashboard</h1>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/messages">Messages</Link>
-        <Link to="/notifications">Notifications</Link>
-      </div>
-    </div>
-  );
-};
+const Navbar = () => (
+    <nav className="navbar">
+        <div className="navbar-brand">Dashboard</div>
+        <div className="navbar-links">
+            <Link to="/">Home</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/login">Login</Link>
+        </div>
+    </nav>
+);
 
 export default Navbar;
